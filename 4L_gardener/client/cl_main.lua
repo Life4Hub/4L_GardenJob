@@ -178,6 +178,7 @@ function StartMowingJob()
     if activeJob then ESX.ShowNotification('You already have an active job') return end
 
     if not IsPositionOccupied(Config.VehicleSpawn.x, Config.VehicleSpawn.y, Config.VehicleSpawn.z, 10, false, true) then
+        activeJob = true
         ESX.Game.SpawnVehicle(Config.Vehicle, Config.VehicleSpawn, Config.VehicleSpawn.w, function(spawnedVehicle)
             TaskWarpPedIntoVehicle(PlayerPedId(), spawnedVehicle, -1)
             activeJob, hasMowingVehicle = true, true
@@ -188,9 +189,9 @@ function StartMowingJob()
     end
 
     CreateThread(function()
-        while activeJob do 
+        while activeJob do
             Wait(9140)
-            if isPlayerDriving then 
+            if isPlayerDriving then
                 collectedPoints = collectedPoints + 1 
                 ESX.ShowNotification('You recieved ~g~x'..collectedPoints..' Garden Points')
             end
@@ -328,6 +329,7 @@ function EndJob()
     activeJob, pickup, collectedPoints = false, nil, 0
     treecare = false
     pickup = false
+    activeJob = false
 end
 
 function DeleteVehicle(vehicle)
