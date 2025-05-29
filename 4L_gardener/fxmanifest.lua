@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Life4tune'
 description 'Garden Job'
-version '1.1'
+version 'v0.0.1'
 
 shared_scripts {
     '@es_extended/imports.lua',
